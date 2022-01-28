@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.test.mapper.OrganizationMapper">
+
+    <select id="selectOneById" resultType="org.example.test.model.entity.Organization">
+        select *
+        from tb_organization
+        where org_id = #{orgId,jdbcType=BIGINT}
+    </select>
+
+    <update id="updateOrgById">
+        update tb_organization
+        set org_name = #{orgName,jdbcType=VARCHAR}
+        where org_id = #{orgId,jdbcType=BIGINT}
+    </update>
+</mapper>

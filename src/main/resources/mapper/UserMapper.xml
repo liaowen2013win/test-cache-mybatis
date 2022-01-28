@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.test.mapper.UserMapper">
+    <!--    开启mybatis的二级缓存-->
+    <cache-ref namespace="org.example.test.mapper.UserMapper"/>
+
+    <select id="queryUserInfo" resultType="org.example.test.model.vo.UserInfoVO">
+        SELECT u.*,
+               o.org_name orgName
+        FROM tb_user u
+                     LEFT JOIN tb_organization o ON u.org_id = o.org_id
+        WHERE u.user_id = #{userId}
+    </select>
+
+    <update id="updateUserById">
+        update tb_user
+        set user_name = #{userName,jdbcType=VARCHAR}
+        where user_id = #{userName,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,44 @@
+#开发服端口号
+server:
+  port: 32222
+  servlet:
+    context-path: /test
+
+#开发库
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://39.104.172.17:3306/test0815?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: Yanlei+2018
+    druid:
+      initial-size: 5  #初始化连接大小
+      min-idle: 5      #最小连接池数量
+      maxActive: 20    #最大连接池数量
+      maxWait: 60000   #获取连接时最大等待时间，单位毫秒
+      timeBetweenEvictionRunsMillis: 60000  #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      minEvictableIdleTimeMillis: 300000    #配置一个连接在池中最小生存的时间，单位是毫秒
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true     #申请连接的时候检测，建议配置为true，不影响性能，并且保证安全性
+      testOnBorrow: false     #获取连接时执行检测，建议关闭，影响性能
+      testOnReturn: false     #归还连接时执行检测，建议关闭，影响性能
+      poolPreparedStatements: true  #是否开启PSCache，PSCache对支持游标的数据库性能提升巨大，oracle建议开启，mysql下建议关闭
+      maxPoolPreparedStatementPerConnectionSize: 20  #开启poolPreparedStatements后生效
+
+
+# mybatis
+mybatis-plus:
+  # xml 扫描，多个目录使用逗号或者分号分隔，告诉 Mapper 对应的 xml 文件位置
+  mapper-locations: classpath:mapper/*.xml,mapper/*/*.xml
+  # 实体位置
+  type-aliases-package: org.example.test.model.entity
+  configuration:
+    # 是否开启自动驼峰命名规则映射：从数据库列名到Java属性驼峰命名的类似映射，如果数据库字段是驼峰，建议设置为false
+    map-underscore-to-camel-case: true
+    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+    call-setters-on-nulls: true
+    # 可以讲执行的sql打印出来
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 开启二级缓存
+    cache-enabled: true
