@@ -104,7 +104,7 @@ public class MyRelativeCache implements Cache {
         // 将 此缓存 加入至这些 caches 的 relations 中
         List<MyRelativeCache> to = UN_LOAD_TO_RELATIVE_CACHES_MAP.get(mapperClass);
         if (to != null) {
-            to.forEach(relativeCache -> this.addRelation(relativeCache));
+            to.forEach(this::addRelation);
         }
         // 加载 此缓存更新时 需要更新的一些缓存 caches
         // 将这些缓存 caches 加入 至 此缓存 relations 中

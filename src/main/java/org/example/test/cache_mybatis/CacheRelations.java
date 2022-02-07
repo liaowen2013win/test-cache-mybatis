@@ -15,10 +15,18 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CacheRelations {
 
-    // from中mapper class对应的缓存更新时，需要更新当前注解标注mapper的缓存
+    /**
+     * from中mapper class对应的缓存更新时，需要更新当前注解标注mapper的缓存
+     *
+     * @return
+     */
     Class<?>[] from() default {};
 
-    // 当前注解标注mapper的缓存更新时，需要更新to中mapper class对应的缓存
+    /**
+     * 当前注解标注mapper的缓存更新时，需要更新to中mapper class对应的缓存
+     *
+     * @return
+     */
     Class<?>[] to() default {};
 
 }
