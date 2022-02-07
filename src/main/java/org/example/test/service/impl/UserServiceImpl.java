@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public UserInfoVO getUserUpdateById(Long userId) {
         UserInfoVO userInfoVO = userMapper.queryUserInfo(userId);
         Organization organization = organizationMapper.selectOneById(userInfoVO.getOrgId());
