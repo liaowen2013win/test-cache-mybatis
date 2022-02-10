@@ -1,5 +1,6 @@
 package org.example.test.service.impl;
 
+import org.example.test.common.Constant;
 import org.example.test.service.TestInitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -20,6 +21,7 @@ public class TestInitServiceImpl implements TestInitService {
     @Override
     public void initOut() {
         System.out.println("MyTestInitThread run ===========");
-        stringRedisTemplate.opsForValue().set("stock", 10 + "");
+        stringRedisTemplate.opsForValue().set(Constant.REDIS_KEY_STOCK, 10 + "");
+        stringRedisTemplate.opsForHash().put(Constant.REDIS_KEY_STOCK_HASH, Constant.REDIS_KEY_STOCK, 10 + "");
     }
 }

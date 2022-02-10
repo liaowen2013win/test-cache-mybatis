@@ -1,6 +1,7 @@
 package org.example.test.controller;
 
 import org.apache.commons.lang3.StringUtils;
+import org.example.test.common.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +22,8 @@ public class RedisTestController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    @RequestMapping("/deduct_stock")
-    public String deductStock() throws InterruptedException {
+    @RequestMapping("/deduct_stock1")
+    public String deductStock1() throws InterruptedException {
         // 相当于 jedis.get("stock")
         String stock1 = stringRedisTemplate.opsForValue().get("stock");
         if (StringUtils.isBlank(stock1)) {
@@ -40,4 +41,17 @@ public class RedisTestController {
         }
         return "扣减成功，剩余库存：" + realStock;
     }
+
+    @RequestMapping("/deduct_stock2")
+    public String deductStock2() throws InterruptedException {
+        // 库存校验，基于redis本身的原子性来保证
+        Long realStock = stringRedisTemplate.opsForHash().increment(Constant.REDIS_KEY_STOCK_HASH, Constant.REDIS_KEY_STOCK, -1);
+        if (realStock > 0) {
+            System.out.println("扣减成功，剩余库存：" + realStock + "");
+        } else {
+            System.out.println("扣减失败，库存不足");
+        }
+        return "扣减成功，剩余库存：" + realStock;
+    }
+
 }
