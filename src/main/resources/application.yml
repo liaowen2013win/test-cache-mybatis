@@ -26,6 +26,11 @@ spring:
       poolPreparedStatements: true  #是否开启PSCache，PSCache对支持游标的数据库性能提升巨大，oracle建议开启，mysql下建议关闭
       maxPoolPreparedStatementPerConnectionSize: 20  #开启poolPreparedStatements后生效
 
+  redis:
+    host: 47.94.168.117
+    port: 6479
+    timeout: 60000
+    password: 123456
 
 # mybatis
 mybatis-plus:

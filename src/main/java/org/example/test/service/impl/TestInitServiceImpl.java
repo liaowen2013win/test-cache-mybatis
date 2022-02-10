@@ -1,6 +1,8 @@
 package org.example.test.service.impl;
 
 import org.example.test.service.TestInitService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,8 +13,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TestInitServiceImpl implements TestInitService {
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
     @Override
     public void initOut() {
         System.out.println("MyTestInitThread run ===========");
+        stringRedisTemplate.opsForValue().set("stock", 10 + "");
     }
 }
