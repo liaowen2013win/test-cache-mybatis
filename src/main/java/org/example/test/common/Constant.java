@@ -11,5 +11,6 @@ public interface Constant {
     String REDIS_KEY_STOCK = "stock";
 
     String REDIS_KEY_STOCK_HASH = "stock:info";
-    
+
+    String LOCAL_ITEM_ALL_MAP = "LOCAL_ITEM_ALL_MAP";
 }

@@ -1,10 +1,15 @@
 package org.example.test.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import org.example.test.mapper.OrganizationMapper;
 import org.example.test.model.entity.Organization;
+import org.example.test.reflect.BaseCacheServiceImpl;
 import org.example.test.service.OrgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.function.Function;
 
 /**
  * todo 填写描述信息
@@ -13,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @date 2022/1/28 13:55
  */
 @Service
-public class OrgServiceImpl implements OrgService {
+public class OrgServiceImpl extends BaseCacheServiceImpl<OrganizationMapper, Organization> implements OrgService {
 
     @Autowired
     private OrganizationMapper organizationMapper;
@@ -25,4 +30,15 @@ public class OrgServiceImpl implements OrgService {
         organizationMapper.updateOrgById(organization);
         return organization;
     }
+
+    @Override
+    public List<Organization> getAllByScrollId(Long scrollId) {
+        return null;
+    }
+
+    @Override
+    public String getCachePrefixKey(Long scrollId) {
+        return null;
+    }
+
 }

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Param;
 import org.example.test.cache_mybatis.MyRelativeCache;
 import org.example.test.model.entity.Organization;
+import org.example.test.reflect.BaseTestMapper;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @CacheNamespace(implementation = MyRelativeCache.class, eviction = MyRelativeCache.class, flushInterval = 30 * 60 * 1000)
-public interface OrganizationMapper extends BaseMapper<Organization> {
+public interface OrganizationMapper extends BaseTestMapper<Organization> {
 
     Organization selectOneById(@Param("orgId") Long orgId);
 
