@@ -64,7 +64,7 @@ public abstract class BaseCacheServiceImpl<M extends BaseTestMapper<T>, T> exten
     }
 
     @Override
-    public Map<Object, T> findAllMapFromCacheByScrollId(Long scrollId) throws Exception {
+    public Map<Object, T> findAllMapFromCacheByTestId(Long scrollId) throws Exception {
         Long l = System.currentTimeMillis();
         Class<T> tClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
         Map<Object, T> hmget = getData(scrollId, tClass);
@@ -72,7 +72,7 @@ public abstract class BaseCacheServiceImpl<M extends BaseTestMapper<T>, T> exten
     }
 
     @Override
-    public List<T> findAllListFromCacheByScrollId(Long scrollId) throws Exception {
+    public List<T> findAllListFromCacheByTestId(Long scrollId) throws Exception {
         List<T> list = Lists.newArrayList();
         Class<T> tClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
         Map<Object, T> hmget = getData(scrollId, tClass);
@@ -86,8 +86,8 @@ public abstract class BaseCacheServiceImpl<M extends BaseTestMapper<T>, T> exten
     public void checkCache(Long scrollId) throws Exception {
         if (!redisUtil.hasKey(getCachePrefixKey(scrollId))) {
             // redis中不存在key,从数据库中重新加载
-            List<T> allByScrollId = getAllByScrollIdWithCache(scrollId);
-            writeBatchToRedis(allByScrollId);
+            List<T> allByTestId = getAllByTestIdWithCache(scrollId);
+            writeBatchToRedis(allByTestId);
         }
         // todo 如果上一步判断缓存存在,这个时候整个缓存都被删除了,会出问题
     }
@@ -122,10 +122,10 @@ public abstract class BaseCacheServiceImpl<M extends BaseTestMapper<T>, T> exten
 
     }
 
-    public abstract List<T> getAllByScrollId(Long scrollId);
+    public abstract List<T> getAllByTestId(Long scrollId);
 
-    private List<T> getAllByScrollIdWithCache(Long scrollId) {
-        List<T> all = getAllByScrollId(scrollId);
+    private List<T> getAllByTestIdWithCache(Long scrollId) {
+        List<T> all = getAllByTestId(scrollId);
 
         Class<T> tClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
         CacheField cacheField = AnnotationUtils.getAnnotation(tClass, CacheField.class);
@@ -141,13 +141,13 @@ public abstract class BaseCacheServiceImpl<M extends BaseTestMapper<T>, T> exten
     }
 
     @Override
-    public Callable<List<T>> getAllByScrollId(Long scrollId, CountDownLatch countDownLatch) {
+    public Callable<List<T>> getAllByTestId(Long scrollId, CountDownLatch countDownLatch) {
         return new Callable<List<T>>() {
             @Override
             public List<T> call() {
                 long l = System.currentTimeMillis();
                 try {
-                    return getAllByScrollIdWithCache(scrollId);
+                    return getAllByTestIdWithCache(scrollId);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -160,13 +160,13 @@ public abstract class BaseCacheServiceImpl<M extends BaseTestMapper<T>, T> exten
     }
 
     @Override
-    public Callable<Map<Object, T>> getAllFromCacheByScrollId(Long scrollId, CountDownLatch countDownLatch) {
+    public Callable<Map<Object, T>> getAllFromCacheByTestId(Long scrollId, CountDownLatch countDownLatch) {
         return new Callable<Map<Object, T>>() {
             @Override
             public Map<Object, T> call() {
                 long l = System.currentTimeMillis();
                 try {
-                    return findAllMapFromCacheByScrollId(scrollId);
+                    return findAllMapFromCacheByTestId(scrollId);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {

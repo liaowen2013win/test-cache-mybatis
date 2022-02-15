@@ -17,17 +17,17 @@ public interface BaseCacheService<T> extends BaseService {
 
     T findFromCacheByBizId(Long bizId, Long scrollId) throws Exception;
 
-    Map<Object, T> findAllMapFromCacheByScrollId(Long scrollId) throws Exception;
+    Map<Object, T> findAllMapFromCacheByTestId(Long scrollId) throws Exception;
 
-    List<T> findAllListFromCacheByScrollId(Long scrollId) throws Exception;
+    List<T> findAllListFromCacheByTestId(Long scrollId) throws Exception;
 
     void checkCache(Long scrollId) throws Exception;
 
     RedisUtil getRedisUtil();
 
-    Callable<List<T>> getAllByScrollId(Long scrollId, CountDownLatch countDownLatch);
+    Callable<List<T>> getAllByTestId(Long scrollId, CountDownLatch countDownLatch);
 
-    Callable<Map<Object, T>> getAllFromCacheByScrollId(Long scrollId, CountDownLatch countDownLatch);
+    Callable<Map<Object, T>> getAllFromCacheByTestId(Long scrollId, CountDownLatch countDownLatch);
 
 
 }

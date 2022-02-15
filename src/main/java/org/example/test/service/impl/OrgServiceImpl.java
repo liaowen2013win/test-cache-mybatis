@@ -33,7 +33,7 @@ public class OrgServiceImpl extends BaseCacheServiceImpl<OrganizationMapper, Org
     }
 
     @Override
-    public List<Organization> getAllByScrollId(Long orgId) {
+    public List<Organization> getAllByTestId(Long orgId) {
         LambdaQueryWrapper<Organization> organizationLambdaQueryWrapper = Wrappers.lambdaQuery();
         organizationLambdaQueryWrapper.eq(Organization::getOrgId, orgId);
         return baseMapper.selectList(organizationLambdaQueryWrapper);
