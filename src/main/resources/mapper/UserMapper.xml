@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.test.mapper.UserMapper">
     <!--    开启mybatis的二级缓存-->
-    <cache-ref namespace="org.example.test.mapper.UserMapper"/>
+<!--    <cache-ref namespace="org.example.test.mapper.UserMapper"/>-->
 
     <select id="queryUserInfo" resultType="org.example.test.model.vo.UserInfoVO">
         SELECT u.*,

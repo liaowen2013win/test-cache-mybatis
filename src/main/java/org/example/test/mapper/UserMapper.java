@@ -7,6 +7,7 @@ import org.example.test.cache_mybatis.CacheRelations;
 import org.example.test.cache_mybatis.MyRelativeCache;
 import org.example.test.model.entity.UserEntity;
 import org.example.test.model.vo.UserInfoVO;
+import org.example.test.reflect.BaseTestMapper;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,9 +17,9 @@ import org.springframework.stereotype.Repository;
  * @date 2022/1/27 18:39
  */
 @Repository
-@CacheNamespace(implementation = MyRelativeCache.class, eviction = MyRelativeCache.class, flushInterval = 30 * 60 * 1000)
-@CacheRelations(from = OrganizationMapper.class)
-public interface UserMapper extends BaseMapper<UserEntity> {
+//@CacheNamespace(implementation = MyRelativeCache.class, eviction = MyRelativeCache.class, flushInterval = 30 * 60 * 1000)
+//@CacheRelations(from = OrganizationMapper.class)
+public interface UserMapper extends BaseTestMapper<UserEntity> {
 
     UserInfoVO queryUserInfo(@Param("userId") Long userId);
 

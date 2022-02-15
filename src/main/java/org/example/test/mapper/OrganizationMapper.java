@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @date 2022/1/27 18:46
  */
 @Repository
-@CacheNamespace(implementation = MyRelativeCache.class, eviction = MyRelativeCache.class, flushInterval = 30 * 60 * 1000)
+//@CacheNamespace(implementation = MyRelativeCache.class, eviction = MyRelativeCache.class, flushInterval = 30 * 60 * 1000)
 public interface OrganizationMapper extends BaseTestMapper<Organization> {
 
     Organization selectOneById(@Param("orgId") Long orgId);

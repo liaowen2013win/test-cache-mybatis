@@ -1,9 +1,12 @@
 package org.example.test.controller;
 
 import org.apache.commons.lang3.StringUtils;
+import org.example.test.model.entity.Organization;
+import org.example.test.service.OrgService;
 import org.example.test.service.RedisTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +28,10 @@ public class RedisTestController {
     @Autowired
     private RedisTestService redisTestService;
 
-    @RequestMapping("/deduct_stock1")
+    @Autowired
+    private OrgService orgService;
+
+    @GetMapping("/deduct_stock1")
     public String deductStock1() {
         // 相当于 jedis.get("stock")
         String stock1 = stringRedisTemplate.opsForValue().get("stock");
@@ -45,9 +51,20 @@ public class RedisTestController {
         return "扣减成功，剩余库存：" + realStock;
     }
 
-    @RequestMapping("/deduct_stock2")
+    @GetMapping("/deduct_stock2")
     public String deductStock2() {
         return redisTestService.deductStock2();
     }
+
+    @GetMapping("/getOrg")
+    public Organization getOrg(Long orgId) {
+        try {
+            return orgService.findFromCacheByBizId(orgId, orgId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }

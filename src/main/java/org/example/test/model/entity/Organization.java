@@ -24,6 +24,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@TableName("tb_organization")
 @CacheKey(name = "orgId")
 @CacheField(name = "orgId")
 public class Organization extends Model<Organization> implements Serializable {
