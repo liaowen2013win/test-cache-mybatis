@@ -1,6 +1,5 @@
 package org.example.test.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Param;
 import org.example.test.cache_mybatis.MyRelativeCache;

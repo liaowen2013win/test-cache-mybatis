@@ -8,5 +8,10 @@ package org.example.test.service;
  */
 public interface RedisTestService {
 
+    /**
+     * 扣减库存
+     *
+     * @return
+     */
     String deductStock2();
 }

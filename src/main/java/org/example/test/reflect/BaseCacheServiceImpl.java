@@ -21,12 +21,12 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * todo 填写描述信息
+ * 缓存实现
  *
  * @author liaowen
  * @date 2022/2/14 15:40
  */
-public class BaseCacheServiceImpl<M extends BaseTestMapper<T>, T> extends BaseServiceImpl implements BaseCacheService<T> {
+public abstract class BaseCacheServiceImpl<M extends BaseTestMapper<T>, T> extends BaseServiceImpl implements BaseCacheService<T> {
 
     @Autowired
     private RedisUtil redisUtil;

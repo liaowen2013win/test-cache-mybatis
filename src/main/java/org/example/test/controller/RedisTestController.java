@@ -26,7 +26,7 @@ public class RedisTestController {
     private RedisTestService redisTestService;
 
     @RequestMapping("/deduct_stock1")
-    public String deductStock1() throws InterruptedException {
+    public String deductStock1() {
         // 相当于 jedis.get("stock")
         String stock1 = stringRedisTemplate.opsForValue().get("stock");
         if (StringUtils.isBlank(stock1)) {
@@ -46,7 +46,7 @@ public class RedisTestController {
     }
 
     @RequestMapping("/deduct_stock2")
-    public String deductStock2() throws InterruptedException {
+    public String deductStock2() {
         return redisTestService.deductStock2();
     }
 

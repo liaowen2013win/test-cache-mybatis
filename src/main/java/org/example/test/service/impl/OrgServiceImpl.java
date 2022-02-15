@@ -1,6 +1,8 @@
 package org.example.test.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import org.example.test.common.Constant;
 import org.example.test.mapper.OrganizationMapper;
 import org.example.test.model.entity.Organization;
 import org.example.test.reflect.BaseCacheServiceImpl;
@@ -9,10 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.function.Function;
 
 /**
- * todo 填写描述信息
+ * 组织服务
  *
  * @author liaowen
  * @date 2022/1/28 13:55
@@ -32,13 +33,15 @@ public class OrgServiceImpl extends BaseCacheServiceImpl<OrganizationMapper, Org
     }
 
     @Override
-    public List<Organization> getAllByScrollId(Long scrollId) {
-        return null;
+    public List<Organization> getAllByScrollId(Long orgId) {
+        LambdaQueryWrapper<Organization> organizationLambdaQueryWrapper = Wrappers.lambdaQuery();
+        organizationLambdaQueryWrapper.eq(Organization::getOrgId, orgId);
+        return baseMapper.selectList(organizationLambdaQueryWrapper);
     }
 
     @Override
-    public String getCachePrefixKey(Long scrollId) {
-        return null;
+    public String getCachePrefixKey(Long orgId) {
+        return Constant.TEST_ORG_INFO_PREFIX_KEY + orgId;
     }
 
 }

@@ -2,6 +2,7 @@ package org.example.test.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
@@ -16,8 +17,12 @@ import java.util.stream.Stream;
  * @author liaowen
  * @date 2022/2/14 15:11
  */
+@Service
 public class RedisUtil {
 
+    /**
+     * 需要配置类：RedisTemplate配置
+     */
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 

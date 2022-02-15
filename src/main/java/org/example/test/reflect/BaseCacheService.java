@@ -13,7 +13,7 @@ import java.util.concurrent.CountDownLatch;
  * @author liaowen
  * @date 2022/2/14 14:37
  */
-public interface BaseCacheService<T> extends BaseService<T> {
+public interface BaseCacheService<T> extends BaseService {
 
     T findFromCacheByBizId(Long bizId, Long scrollId) throws Exception;
 
