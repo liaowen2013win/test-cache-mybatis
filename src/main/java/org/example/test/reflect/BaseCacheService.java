@@ -15,19 +15,19 @@ import java.util.concurrent.CountDownLatch;
  */
 public interface BaseCacheService<T> extends BaseService {
 
-    T findFromCacheByBizId(Long bizId, Long scrollId) throws Exception;
+    T findFromCacheByBizId(Long bizId, Long testId) throws Exception;
 
-    Map<Object, T> findAllMapFromCacheByTestId(Long scrollId) throws Exception;
+    Map<Object, T> findAllMapFromCacheByTestId(Long testId) throws Exception;
 
-    List<T> findAllListFromCacheByTestId(Long scrollId) throws Exception;
+    List<T> findAllListFromCacheByTestId(Long testId) throws Exception;
 
-    void checkCache(Long scrollId) throws Exception;
+    void checkCache(Long testId) throws Exception;
 
     RedisUtil getRedisUtil();
 
-    Callable<List<T>> getAllByTestId(Long scrollId, CountDownLatch countDownLatch);
+    Callable<List<T>> getAllByTestId(Long testId, CountDownLatch countDownLatch);
 
-    Callable<Map<Object, T>> getAllFromCacheByTestId(Long scrollId, CountDownLatch countDownLatch);
+    Callable<Map<Object, T>> getAllFromCacheByTestId(Long testId, CountDownLatch countDownLatch);
 
 
 }

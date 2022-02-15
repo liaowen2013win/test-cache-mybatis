@@ -111,8 +111,8 @@ public class LocalCacheUtil {
         }
     }
 
-    public static void removeBizCache(Object scrollId, Object languageId) {
-        LocalCacheUtil.remove(Constant.LOCAL_ITEM_ALL_MAP + scrollId);
+    public static void removeBizCache(Object testId, Object languageId) {
+        LocalCacheUtil.remove(Constant.LOCAL_ITEM_ALL_MAP + testId);
     }
 
     public static void addCacheThread(String threadName) {
